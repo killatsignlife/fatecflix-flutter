@@ -152,4 +152,8 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
+
+  void _consultar() async {
+    final todasLinhas = await dbHelper.
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:fatecflix_mobile/appController.dart';
 import 'package:fatecflix_mobile/dashboard.dart';
+import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,7 @@ class CadastrarUsuario extends StatelessWidget {
   final AppController controller = Get.put(AppController());
   //final AppController controller = Get.find();
 
+  final dbHelper = DatabaseHelper.instance;
 
   CadastrarUsuario({super.key});
 
@@ -46,9 +48,29 @@ class CadastrarUsuario extends StatelessWidget {
             onPressed: () {
               Get.to(Dashboard());
             },
+          ),
+          ElevatedButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              _inserir();
+            },
           )
         ],
       ),
     );
+  }
+
+  void _inserir() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnNome: 'Teste',
+      DatabaseHelper.columnSobrenome: 'Testado',
+      DatabaseHelper.columnEmail: 'teste@teste.com',
+      DatabaseHelper.columnCurso: 'Curso Teste',
+      DatabaseHelper.columnRa: 123445,
+      DatabaseHelper.columnSemestre: 3
+    };
+
+    final id = await dbHelper.insert(row);
+    print('linha inserida id: $id');
   }
 }
