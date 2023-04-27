@@ -1,6 +1,7 @@
 import 'package:fatecflix_mobile/appController.dart';
 import 'package:fatecflix_mobile/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -71,6 +72,8 @@ class CadastrarUsuario extends StatelessWidget {
     };
 
     final id = await dbHelper.insert(row);
-    print('linha inserida id: $id');
+    if (kDebugMode) {
+      print('linha inserida id: $id');
+    }
   }
 }
