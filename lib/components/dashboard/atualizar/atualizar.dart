@@ -1,8 +1,8 @@
-import 'package:fatecflix_mobile/dashboard.dart';
+import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fatecflix_mobile/appController.dart';
+import 'package:fatecflix_mobile/controller/appController.dart';
 import 'package:get/get.dart';
 
 class AtualizarUsuario extends StatelessWidget {

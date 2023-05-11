@@ -1,8 +1,8 @@
-import 'package:fatecflix_mobile/appController.dart';
-import 'package:fatecflix_mobile/atualizar.dart';
-import 'package:fatecflix_mobile/cadastrar.dart';
+import 'package:fatecflix_mobile/controller/appController.dart';
+import 'package:fatecflix_mobile/components/dashboard/atualizar/atualizar.dart';
+import 'package:fatecflix_mobile/components/dashboard/cadastrar/cadastrar.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
-import 'package:fatecflix_mobile/deletar.dart';
+import 'package:fatecflix_mobile/components/dashboard/deletar/deletar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
