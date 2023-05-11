@@ -1,7 +1,9 @@
 import 'package:fatecflix_mobile/appController.dart';
 import 'package:fatecflix_mobile/atualizar.dart';
 import 'package:fatecflix_mobile/cadastrar.dart';
+import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:fatecflix_mobile/deletar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,7 @@ class Dashboard extends StatelessWidget {
     um botão 'Add' para adicionar usuario.
   */
   final AppController controller = Get.put(AppController());
+  final dbHelper = DatabaseHelper.instance;
   Dashboard({super.key});
 
   static const String _title = 'FatecFlix';
@@ -151,5 +154,17 @@ class Dashboard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _consultar() async {
+    final todasLinhas = await dbHelper.queryAllRows();
+
+    print('Consulta toda as linhas:');
+
+    for (var row in todasLinhas) {
+      if (kDebugMode) {
+        print(row);
+      }
+    }
   }
 }

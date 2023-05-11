@@ -1,5 +1,7 @@
 import 'package:fatecflix_mobile/appController.dart';
 import 'package:fatecflix_mobile/dashboard.dart';
+import 'package:fatecflix_mobile/data/database_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +10,7 @@ class DeletarUsuario extends StatelessWidget {
     TODO: Deletar usuario
   */
   final AppController controller = Get.put(AppController());
+  final dbHelper = DatabaseHelper.instance;
 
   DeletarUsuario({super.key});
 
@@ -36,5 +39,14 @@ class DeletarUsuario extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _deletar() async {
+    final id = await dbHelper.queryRowCount();
+    final linhaDeletada = await dbHelper.delete(id!);
+
+    if (kDebugMode) {
+      print('Deletada(s) $linhaDeletada linha(s): linha $id');
+    }
   }
 }

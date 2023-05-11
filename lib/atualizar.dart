@@ -1,4 +1,6 @@
 import 'package:fatecflix_mobile/dashboard.dart';
+import 'package:fatecflix_mobile/data/database_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fatecflix_mobile/appController.dart';
 import 'package:get/get.dart';
@@ -23,7 +25,8 @@ class AtualizarUsuario extends StatelessWidget {
   final AppController controller = Get.put(AppController());
   //final AppController controller = Get.find();
 
-
+  final dbHelper = DatabaseHelper.instance;
+  
   AtualizarUsuario({super.key});
 
   static const String _title = 'FatecFlix';
@@ -51,5 +54,23 @@ class AtualizarUsuario extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _atualizar() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnId: 1,
+      DatabaseHelper.columnNome: 'Maria',
+      DatabaseHelper.columnSobrenome: 'da Conceição',
+      DatabaseHelper.columnCurso: 'ADS',
+      DatabaseHelper.columnEmail: 'maria@email.com',
+      DatabaseHelper.columnRa: 1234555,
+      DatabaseHelper.columnSemestre: 3,
+    };
+
+    final linhaAtualizada = await dbHelper.update(row);
+
+    if (kDebugMode) {
+      print('atualizadas $linhaAtualizada linha (s)');
+    }
   }
 }
