@@ -57,20 +57,20 @@ class AtualizarUsuario extends StatelessWidget {
   }
 
   void _atualizar() async {
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnId: 1,
-      DatabaseHelper.columnNome: 'Maria',
-      DatabaseHelper.columnSobrenome: 'da Conceição',
-      DatabaseHelper.columnCurso: 'ADS',
-      DatabaseHelper.columnEmail: 'maria@email.com',
-      DatabaseHelper.columnRa: 1234555,
-      DatabaseHelper.columnSemestre: 3,
-    };
+    // Map<String, dynamic> row = {
+    //   DatabaseHelper.columnId: 1,
+    //   DatabaseHelper.columnNome: 'Maria',
+    //   DatabaseHelper.columnSobrenome: 'da Conceição',
+    //   DatabaseHelper.columnCurso: 'ADS',
+    //   DatabaseHelper.columnEmail: 'maria@email.com',
+    //   DatabaseHelper.columnRa: 1234555,
+    //   DatabaseHelper.columnSemestre: 3,
+    // };
 
-    final linhaAtualizada = await dbHelper.update(row);
+    // final linhaAtualizada = await dbHelper.update(row);
 
     if (kDebugMode) {
-      print('atualizadas $linhaAtualizada linha (s)');
+      print('atualizadas linha (s)');
     }
   }
 }

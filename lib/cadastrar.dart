@@ -62,18 +62,18 @@ class CadastrarUsuario extends StatelessWidget {
   }
 
   void _inserir() async {
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnNome: 'Teste',
-      DatabaseHelper.columnSobrenome: 'Testado',
-      DatabaseHelper.columnEmail: 'teste@teste.com',
-      DatabaseHelper.columnCurso: 'Curso Teste',
-      DatabaseHelper.columnRa: 123445,
-      DatabaseHelper.columnSemestre: 3
-    };
+    // Map<String, dynamic> row = {
+    //   DatabaseHelper.columnNome: 'Teste',
+    //   DatabaseHelper.columnSobrenome: 'Testado',
+    //   DatabaseHelper.columnEmail: 'teste@teste.com',
+    //   DatabaseHelper.columnCurso: 'Curso Teste',
+    //   DatabaseHelper.columnRa: 123445,
+    //   DatabaseHelper.columnSemestre: 3
+    // };
 
-    final id = await dbHelper.insert(row);
+    // final id = await dbHelper.insert(row);
     if (kDebugMode) {
-      print('linha inserida id: $id');
+      print('linha inserida id');
     }
   }
 }

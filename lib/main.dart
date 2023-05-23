@@ -9,7 +9,6 @@ void main() {
   ));
 }
 
-<<<<<<< HEAD
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -26,5 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-=======
->>>>>>> origin/feature/login
