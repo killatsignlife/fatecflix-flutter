@@ -3,7 +3,7 @@ import 'package:fatecflix_mobile/data/database_helper.dart';
 class Student {
   int? id;
   String? nome;
-  BigInt? ra;
+  int? ra;
   int? cpf;
   String? email;
   String? dataNascimento;
@@ -13,7 +13,6 @@ class Student {
   String? senha;
 
   Student(
-    this.id, 
     this.nome, 
     this.ra, 
     this.cpf,
@@ -24,6 +23,7 @@ class Student {
     this.periodo, 
     this.senha
   );
+
 
   Student.fromMap(Map<String, dynamic> map) {
     id = map['id'];

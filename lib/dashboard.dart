@@ -3,6 +3,7 @@ import 'package:fatecflix_mobile/atualizar.dart';
 import 'package:fatecflix_mobile/cadastrar.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:fatecflix_mobile/deletar.dart';
+import 'package:fatecflix_mobile/model/student.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class Dashboard extends StatelessWidget {
   Dashboard({super.key});
 
   static const String _title = 'FatecFlix';
+  List<Student> students = [];
 
   @override
   Widget build(BuildContext context) {
@@ -160,11 +162,11 @@ class Dashboard extends StatelessWidget {
     final todasLinhas = await dbHelper.queryAllRows();
 
     print('Consulta toda as linhas:');
-
+    students.clear();
     for (var row in todasLinhas) {
-      if (kDebugMode) {
-        print(row);
-      }
+      students.add(Student.fromMap(row));
     }
+
+    //setState(() {});
   }
 }
