@@ -26,7 +26,7 @@ class AtualizarUsuario extends StatelessWidget {
   //final AppController controller = Get.find();
 
   final dbHelper = DatabaseHelper.instance;
-  
+
   AtualizarUsuario({super.key});
 
   static const String _title = 'FatecFlix';
@@ -35,20 +35,21 @@ class AtualizarUsuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(_title), 
+        title: const Text(_title),
         backgroundColor: Colors.red,
         //automaticallyImplyLeading: false,
       ),
       body: Column(
         children: <Widget>[
-         const Center(child: Text('Atualize um usuario')),
+          const Center(child: Text('Atualize um usuario')),
           Obx(() => Text(
-            '${controller.message.value}',
-          )),
+                '${controller.message.value}',
+              )),
           ElevatedButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              Get.to(Dashboard());
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboard()));
             },
           )
         ],

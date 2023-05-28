@@ -1,6 +1,5 @@
+import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 //https://www.kindacode.com/article/flutter-set-gradient-background-color-for-entire-screen/
 class MyApp extends StatelessWidget {
@@ -93,7 +92,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                             iconColor: Colors.white,
                             hintText: "usuario@email.com",
                             labelText: "e-mail",
-                            labelStyle: TextStyle(color: Colors.white)),
+                            labelStyle:
+                                TextStyle(color: Colors.white, fontSize: 18)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -116,7 +116,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                             icon: Icon(Icons.password),
                             iconColor: Colors.white,
                             labelText: "senha",
-                            labelStyle: TextStyle(color: Colors.white)),
+                            labelStyle:
+                                TextStyle(color: Colors.white, fontSize: 18)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -135,14 +136,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: Color.fromARGB(255, 194, 41, 31),
+                            backgroundColor: const Color.fromARGB(255, 194, 41, 31),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0),
                             )),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _login();
-                          }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard()));
                         },
                         child: const Text(
                           "ENTRAR",
@@ -166,7 +168,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                         },
                         child: const Text(
                           "Cadastre-se",
-                          style: TextStyle(color: Color.fromARGB(255, 194, 41, 31), fontSize: 22.0),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 194, 41, 31),
+                              fontSize: 22.0),
                         ),
                       ),
                     ),

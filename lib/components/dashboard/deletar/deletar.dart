@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DeletarUsuario extends StatelessWidget {
-   /* 
+  /* 
     TODO: Deletar usuario
   */
   final AppController controller = Get.put(AppController());
@@ -20,20 +20,21 @@ class DeletarUsuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(_title), 
+        title: const Text(_title),
         backgroundColor: Colors.red,
         //automaticallyImplyLeading: false,
       ),
       body: Column(
         children: <Widget>[
-         const Center(child: Text('Delete um usuario')),
+          const Center(child: Text('Delete um usuario')),
           Obx(() => Text(
-            '${controller.message.value}',
-          )),
+                '${controller.message.value}',
+              )),
           ElevatedButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              Get.to(Dashboard());
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboard()));
             },
           )
         ],

@@ -47,7 +47,8 @@ class CadastrarUsuario extends StatelessWidget {
           ElevatedButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              Get.to(Dashboard());
+               Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboard()));
             },
           ),
           ElevatedButton(
