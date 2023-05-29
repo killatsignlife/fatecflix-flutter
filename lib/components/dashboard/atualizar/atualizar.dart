@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:fatecflix_mobile/controller/appController.dart';
 import 'package:get/get.dart';
 
-
 class AtualizarUsuario extends StatefulWidget {
   const AtualizarUsuario({super.key});
 
   @override
-  State<AtualizarUsuario> createState() => _AtualizarUsuariotState();
+  State<AtualizarUsuario> createState() => _AtualizarUsuarioState();
 }
 
-class _AtualizarUsuariotState extends State<AtualizarUsuario> {
-  
+class _AtualizarUsuarioState extends State<AtualizarUsuario> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController nomeController = TextEditingController();
@@ -28,7 +26,15 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
   TextEditingController senhaController = TextEditingController();
   TextEditingController confirmacaoSenhaController = TextEditingController();
 
-  
+  final dbHelper = DatabaseHelper.instance;
+
+  void _showMessafeInScafold(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  }
+
+
   void _atualizaUsuario() {
     setState(() {
       String nome = nomeController.text;
@@ -43,8 +49,7 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
       String confirmacaoSenha = confirmacaoSenhaController.text;
     });
   }
-  
-   
+
   @override
   Widget build(BuildContext context) {
     const inputFontSize = 18.0;
@@ -61,14 +66,15 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
           child: Column(
             children: <Widget>[
               sizedBoxSpace,
-              const Center(child: 
-                Text(
-                  'Atualizar dados do usuário', 
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    ),)),
-                  sizedBoxSpace,
+              const Center(
+                  child: Text(
+                'Atualizar dados do usuário',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              )),
+              sizedBoxSpace,
               Form(
                 key: _formKey,
                 child: Column(
@@ -84,8 +90,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "Nome completo",
                             labelText: "nome",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -109,8 +115,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "usuario@email.com",
                             labelText: "e-mail",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -134,8 +140,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "000000000000",
                             labelText: "RA",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -159,8 +165,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "000.000.000-00",
                             labelText: "CPF",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -184,8 +190,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "00/00/0000",
                             labelText: "Data de Nascimento",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -209,8 +215,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             hintText: "DSM",
                             labelText: "Curso",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -233,8 +239,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             icon: Icon(Icons.date_range),
                             iconColor: Colors.black,
                             labelText: "Ano de ingresso",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -258,8 +264,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Período",
                             hintText: "Manhã, Tarde, Noite, EAD",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -283,8 +289,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Senha",
                             hintText: "",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -308,8 +314,8 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Confirmação de senha",
                             hintText: "",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -326,27 +332,29 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
                     sizedBoxSpace,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: const Color.fromARGB(255, 22, 12, 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            )),
-                      child: 
-                      const Text("Atualizar Dados"),
+                          minimumSize: const Size(320.0, 48.0),
+                          backgroundColor:
+                              const Color.fromARGB(255, 22, 12, 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          )),
+                      child: const Text("Atualizar Dados"),
                       onPressed: () {
-                        
+                        if (_formKey.currentState!.validate()) {
+                          _atualizaUsuario();
+                        }
                       },
                     ),
                     sizedBoxSpace,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: const Color.fromARGB(255, 22, 12, 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            )),
-                      child: 
-                      const Text("Ir para a Dashboard"),
+                          minimumSize: const Size(320.0, 48.0),
+                          backgroundColor:
+                              const Color.fromARGB(255, 22, 12, 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          )),
+                      child: const Text("Ir para a Dashboard"),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -363,22 +371,7 @@ class _AtualizarUsuariotState extends State<AtualizarUsuario> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class AtualizarUsuario1 extends StatelessWidget {
-  
   /* 
     TODO: Atualizar o Usuario (aluno) usando os campos:
      1. Nome Completo

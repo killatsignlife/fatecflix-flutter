@@ -10,7 +10,7 @@ class DatabaseHelper {
 
   static const table = 'usuario';
 
-  static const columnId = '_id';
+  static const columnId = 'id';
   static const columnNome = 'nome';
   static const columnSobrenome = 'sobrenome';
   static const columnEmail = 'email';
@@ -34,7 +34,6 @@ class DatabaseHelper {
   }
 
   _initDatabase() async {
-
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
@@ -47,13 +46,13 @@ class DatabaseHelper {
             $columnNome TEXT NOT NULL,
             $columnSobrenome TEXT NOT NULL,
             $columnEmail TEXT NOT NULL,
-            $columnRa INTEGER NOT NULL,
-            $columnCpf INT NOT NULL,
+            $columnRa TEXT NOT NULL,
+            $columnCpf TEXT NOT NULL,
             $columnDataNascimento TEXT NOT NULL,
-            $columnCurso INT NOT NULL,
-            $columnAnoIngresso INT NOT NULL,
-            $columnPeriodo INT NOT NULL,
-            $columnSenha INT NOT NULL
+            $columnCurso TEXT NOT NULL,
+            $columnAnoIngresso TEXT NOT NULL,
+            $columnPeriodo TEXT NOT NULL,
+            $columnSenha TEXT NOT NULL
           )
           ''');
   }
@@ -77,6 +76,11 @@ class DatabaseHelper {
 
     return Sqflite.firstIntValue(
         await db!.rawQuery('SELECT COUNT(*) FROM $table'));
+  }
+
+  Future<List<Map<String, dynamic>>> queryRows(id) async {
+    Database? db = await instance.database;
+    return await db!.query(table, where: "$columnId LIKE '%$id%'");
   }
 
   // Update

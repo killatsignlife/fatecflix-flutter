@@ -329,10 +329,10 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
                             fontSize: inputFontSize),
-                        controller: senhaController,
+                        controller: confirmacaoSenhaController,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Digite sua senha";
+                          if (value!.isEmpty || value != senhaController.text) {
+                            return "A confirmação deve ser preenchida e ser igual a senha";
                           }
                           return null;
                         },
@@ -349,7 +349,9 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                           )),
                       child: const Text("Cadastrar usuário"),
                       onPressed: () {
+                        if (_formKey.currentState!.validate()){
                         _cadastraUsuario();
+                        }
                       },
                     ),
                     sizedBoxSpace,
