@@ -32,6 +32,12 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
 
   final dbHelper = DatabaseHelper.instance;
 
+  void _showMessafeInScafold(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  }
+
   void _cadastraUsuario() {
     setState(() {
       String nome = nomeController.text;
@@ -44,6 +50,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
       String periodo = periodoController.text;
       String senha = senhaController.text;
       String confirmacaoSenha = confirmacaoSenhaController.text;
+      _inserir(
+          nome, email, ra, cpf, nascimento, curso, anoIngresso, periodo, senha);
     });
   }
 
@@ -64,17 +72,18 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
           child: Column(
             children: <Widget>[
               sizedBoxSpace,
-              const Center(child: 
-                Text(
-                  'Cadastre um aluno ou instrutor', 
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    ),)),
+              const Center(
+                  child: Text(
+                'Cadastre um aluno ou instrutor',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              )),
               Obx(() => Text(
                     '${controller.message.value}',
                   )),
-                  sizedBoxSpace,
+              sizedBoxSpace,
               Form(
                 key: _formKey,
                 child: Column(
@@ -90,8 +99,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "Nome completo",
                             labelText: "nome",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -115,8 +124,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "usuario@email.com",
                             labelText: "e-mail",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -140,8 +149,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "000000000000",
                             labelText: "RA",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -165,8 +174,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "000.000.000-00",
                             labelText: "CPF",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -190,8 +199,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "00/00/0000",
                             labelText: "Data de Nascimento",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -215,8 +224,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             hintText: "DSM",
                             labelText: "Curso",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -239,8 +248,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             icon: Icon(Icons.date_range),
                             iconColor: Colors.black,
                             labelText: "Ano de ingresso",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -264,8 +273,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Período",
                             hintText: "Manhã, Tarde, Noite, EAD",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -289,8 +298,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Senha",
                             hintText: "",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -314,8 +323,8 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                             iconColor: Colors.black,
                             labelText: "Confirmação de senha",
                             hintText: "",
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: labelFontSize)),
+                            labelStyle: TextStyle(
+                                color: Colors.black, fontSize: labelFontSize)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
@@ -332,27 +341,27 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                     sizedBoxSpace,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: const Color.fromARGB(255, 22, 12, 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            )),
-                      child: 
-                      const Text("Cadastrar usuário"),
+                          minimumSize: const Size(320.0, 48.0),
+                          backgroundColor:
+                              const Color.fromARGB(255, 22, 12, 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          )),
+                      child: const Text("Cadastrar usuário"),
                       onPressed: () {
-                        _inserir();
+                        _cadastraUsuario();
                       },
                     ),
                     sizedBoxSpace,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: const Color.fromARGB(255, 22, 12, 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            )),
-                      child: 
-                      const Text("Ir para a Dashboard"),
+                          minimumSize: const Size(320.0, 48.0),
+                          backgroundColor:
+                              const Color.fromARGB(255, 22, 12, 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          )),
+                      child: const Text("Ir para a Dashboard"),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -368,17 +377,23 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
         ));
   }
 
-  void _inserir() async {
+  void _inserir(nome, email, ra, cpf, nascimento, curso, anoIngresso, periodo,
+      senha) async {
     Map<String, dynamic> row = {
-      DatabaseHelper.columnNome: 'Teste',
-      DatabaseHelper.columnSobrenome: 'Testado',
-      DatabaseHelper.columnEmail: 'teste@teste.com',
-      DatabaseHelper.columnCurso: 'Curso Teste',
-      DatabaseHelper.columnRa: 123445,
-      DatabaseHelper.columnSemestre: 3
+      DatabaseHelper.columnNome: nome,
+      DatabaseHelper.columnSobrenome: nome,
+      DatabaseHelper.columnEmail: email,
+      DatabaseHelper.columnRa: ra,
+      DatabaseHelper.columnCpf: cpf,
+      DatabaseHelper.columnDataNascimento: nascimento,
+      DatabaseHelper.columnCurso: curso,
+      DatabaseHelper.columnAnoIngresso: anoIngresso,
+      DatabaseHelper.columnPeriodo: periodo,
+      DatabaseHelper.columnSenha: senha
     };
-
     final id = await dbHelper.insert(row);
+    _showMessafeInScafold('Usuário Cadastrado com succeso id: $id');
+
     if (kDebugMode) {
       print('linha inserida id: $id');
     }
