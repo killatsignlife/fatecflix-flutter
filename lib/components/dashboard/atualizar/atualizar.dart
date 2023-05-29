@@ -28,6 +28,9 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
 
   final dbHelper = DatabaseHelper.instance;
 
+  // int usuarioId;   
+  // Usuario usuarioid = {};
+
   void _showMessafeInScafold(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
@@ -369,6 +372,17 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
           ),
         ));
   }
+
+
+  void _consultaId(id) {
+    final user = await dbHelper.queryRows(id);
+    setState(() {
+      usuario = user;
+      // nomeController = user.nome;
+    });
+  }
+
+
 }
 
 class AtualizarUsuario1 extends StatelessWidget {
@@ -438,5 +452,10 @@ class AtualizarUsuario1 extends StatelessWidget {
     if (kDebugMode) {
       print('atualizadas $linhaAtualizada linha (s)');
     }
+  }
+
+
+  void _consultaId(id) {
+    final user = await dbHelper.queryRows(id);
   }
 }
