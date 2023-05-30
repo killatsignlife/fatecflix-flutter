@@ -9,19 +9,6 @@ import 'package:get/get.dart';
 
 import '../../model/usuario.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -37,8 +24,9 @@ class Dashboard extends StatefulWidget {
   */
 class _DashboardState extends State<Dashboard> {
   List<Usuario> usuarios = [];
+  int? usuarioId;
 
-  @override
+    @override
   void initState() {
     super.initState();
     _consultar();
@@ -151,11 +139,12 @@ class _DashboardState extends State<Dashboard> {
                                 ElevatedButton(
                                   child: const Icon(Icons.update),
                                   onPressed: () {
+                                    usuarioId = element.id;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                AtualizarUsuario()));
+                                                AtualizarUsuario(usuarioId)));
                                   },
                                 ),
                               ),
@@ -163,6 +152,7 @@ class _DashboardState extends State<Dashboard> {
                                 ElevatedButton(
                                   child: const Icon(Icons.delete),
                                   onPressed: () {
+                                    usuarioId = element.id;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

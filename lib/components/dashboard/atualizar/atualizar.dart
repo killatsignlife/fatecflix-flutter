@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:fatecflix_mobile/controller/appController.dart';
 import 'package:get/get.dart';
 
+import '../../../model/usuario.dart';
+
 class AtualizarUsuario extends StatefulWidget {
-  const AtualizarUsuario({super.key});
+  const AtualizarUsuario(this.usuarioId, {super.key});
+  final int? usuarioId;
 
   @override
   State<AtualizarUsuario> createState() => _AtualizarUsuarioState();
@@ -28,15 +31,38 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
 
   final dbHelper = DatabaseHelper.instance;
 
-  // int usuarioId;   
-  // Usuario usuarioid = {};
-
   void _showMessafeInScafold(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
     ));
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _consultaId(widget.usuarioId);
+  }
+
+  // int usuarioId;
+  List<Usuario> usuario = [];
+
+  void _consultaId(id) async {
+    final user = await dbHelper.queryRows(id);
+    for (var row in user) {
+      usuario.add(Usuario.fromMap(row));
+    }
+    setState(() {
+      nomeController.text = usuario[0].nome!;
+      emailController.text = usuario[0].email!;
+      raController.text = usuario[0].ra!;
+      cpfController.text = usuario[0].cpf!;
+      nascimentoController.text = usuario[0].nascimento!;
+      cursoController.text = usuario[0].curso!;
+      anoIngressoController.text = usuario[0].anoIngresso!;
+      periodoController.text = usuario[0].periodo!;
+      senhaController.text = usuario[0].senha!;
+    });
+  }
 
   void _atualizaUsuario() {
     setState(() {
@@ -51,6 +77,23 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
       String senha = senhaController.text;
       String confirmacaoSenha = confirmacaoSenhaController.text;
     });
+
+    void _atualizar() async {
+      Map<String, dynamic> row = {
+        DatabaseHelper.columnId: 1,
+        DatabaseHelper.columnNome: 'Maria',
+        DatabaseHelper.columnSobrenome: 'da Conceição',
+        DatabaseHelper.columnCurso: 'ADS',
+        DatabaseHelper.columnEmail: 'maria@email.com',
+        DatabaseHelper.columnRa: 1234555,
+      };
+
+      final linhaAtualizada = await dbHelper.update(row);
+
+      if (kDebugMode) {
+        print('atualizadas $linhaAtualizada linha (s)');
+      }
+    }
   }
 
   @override
@@ -323,7 +366,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         style: const TextStyle(
                             color: Color.fromARGB(202, 24, 23, 23),
                             fontSize: inputFontSize),
-                        controller: senhaController,
+                        controller: confirmacaoSenhaController,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Digite sua senha";
@@ -371,91 +414,5 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
             ],
           ),
         ));
-  }
-
-
-  void _consultaId(id) {
-    final user = await dbHelper.queryRows(id);
-    setState(() {
-      usuario = user;
-      // nomeController = user.nome;
-    });
-  }
-
-
-}
-
-class AtualizarUsuario1 extends StatelessWidget {
-  /* 
-    TODO: Atualizar o Usuario (aluno) usando os campos:
-     1. Nome Completo
-     2. Email
-     3. RA
-     4. CPF
-     5. Data de Nascimento
-     6. Curso
-     7. Ano de ingresso
-     8. Periodo
-     9. Senha
-     10. Confirmação da Senha
-
-     Colocar avisos antecedendo que o erro do usuario
-  */
-
-  final AppController controller = Get.put(AppController());
-  //final AppController controller = Get.find();
-
-  final dbHelper = DatabaseHelper.instance;
-
-  AtualizarUsuario1({super.key});
-
-  static const String _title = 'FatecFlix';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(_title),
-        backgroundColor: Colors.red,
-        //automaticallyImplyLeading: false,
-      ),
-      body: Column(
-        children: <Widget>[
-          const Center(child: Text('Atualize um usuario')),
-          Obx(() => Text(
-                '${controller.message.value}',
-              )),
-          ElevatedButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Dashboard()));
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  void _atualizar() async {
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnId: 1,
-      DatabaseHelper.columnNome: 'Maria',
-      DatabaseHelper.columnSobrenome: 'da Conceição',
-      DatabaseHelper.columnCurso: 'ADS',
-      DatabaseHelper.columnEmail: 'maria@email.com',
-      DatabaseHelper.columnRa: 1234555,
-    };
-
-    final linhaAtualizada = await dbHelper.update(row);
-
-    if (kDebugMode) {
-      print('atualizadas $linhaAtualizada linha (s)');
-    }
-  }
-
-
-  void _consultaId(id) {
-    final user = await dbHelper.queryRows(id);
   }
 }

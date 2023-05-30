@@ -18,7 +18,7 @@ class DatabaseHelper {
   static const columnCpf = 'cpf';
   static const columnDataNascimento = 'nascimento';
   static const columnCurso = 'curso';
-  static const columnAnoIngresso = 'ano';
+  static const columnAnoIngresso = 'anoIngresso';
   static const columnPeriodo = 'periodo';
   static const columnSenha = 'senha';
 

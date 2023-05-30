@@ -16,18 +16,21 @@ class Usuario {
       this.curso, this.anoIngresso, this.periodo, this.senha);
 
   Usuario.fromMap(Map<String, dynamic> map) {
+
     id = map["id"];
     nome = map["nome"];
     email = map["email"];
     cpf = map["cpf"];
+    ra = map["ra"];
     nascimento = map["nascimento"];
     curso = map["curso"];
     anoIngresso = map["anoIngresso"];
     periodo = map["periodo"];
     senha = map["senha"];
+    
   }
 
-Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       DatabaseHelper.columnId: id,
       DatabaseHelper.columnNome: nome,
@@ -41,8 +44,5 @@ Map<String, dynamic> toMap() {
       DatabaseHelper.columnPeriodo: periodo,
       DatabaseHelper.columnSenha: senha,
     };
-    
   }
-
-
 }
