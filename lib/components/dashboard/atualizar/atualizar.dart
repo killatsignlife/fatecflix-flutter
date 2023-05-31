@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
@@ -43,7 +45,6 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
     _consultaId(widget.usuarioId);
   }
 
-  // int usuarioId;
   List<Usuario> usuario = [];
 
   void _consultaId(id) async {
@@ -64,35 +65,27 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
     });
   }
 
-  void _atualizaUsuario() {
-    setState(() {
-      String nome = nomeController.text;
-      String email = emailController.text;
-      String ra = raController.text;
-      String cpf = cpfController.text;
-      String nascimento = nascimentoController.text;
-      String curso = cursoController.text;
-      String anoIngresso = anoIngressoController.text;
-      String periodo = periodoController.text;
-      String senha = senhaController.text;
-      String confirmacaoSenha = confirmacaoSenhaController.text;
-    });
+  void _atualizar() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnId: widget.usuarioId,
+      DatabaseHelper.columnNome: nomeController.text,
+      DatabaseHelper.columnSobrenome: nomeController.text,
+      DatabaseHelper.columnEmail: emailController.text,
+      DatabaseHelper.columnRa: raController.text,
+      DatabaseHelper.columnCpf: cpfController.text,
+      DatabaseHelper.columnDataNascimento: nascimentoController.text,
+      DatabaseHelper.columnCurso: cursoController.text,
+      DatabaseHelper.columnAnoIngresso: anoIngressoController.text,
+      DatabaseHelper.columnPeriodo: periodoController.text,
+      DatabaseHelper.columnSenha: senhaController.text
+    };
 
-    void _atualizar() async {
-      Map<String, dynamic> row = {
-        DatabaseHelper.columnId: 1,
-        DatabaseHelper.columnNome: 'Maria',
-        DatabaseHelper.columnSobrenome: 'da Conceição',
-        DatabaseHelper.columnCurso: 'ADS',
-        DatabaseHelper.columnEmail: 'maria@email.com',
-        DatabaseHelper.columnRa: 1234555,
-      };
+    final linhaAtualizada = await dbHelper.update(row);
 
-      final linhaAtualizada = await dbHelper.update(row);
+    _showMessafeInScafold('Usuário atualizado com succeso');
 
-      if (kDebugMode) {
-        print('atualizadas $linhaAtualizada linha (s)');
-      }
+    if (kDebugMode) {
+      print('atualizadas $linhaAtualizada linha (s)');
     }
   }
 
@@ -368,8 +361,8 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                             fontSize: inputFontSize),
                         controller: confirmacaoSenhaController,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Digite sua senha";
+                          if (value!.isEmpty || value != senhaController.text) {
+                            return "A confirmação deve ser preenchida e ser igual a senha";
                           }
                           return null;
                         },
@@ -387,7 +380,15 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                       child: const Text("Atualizar Dados"),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          _atualizaUsuario();
+                          _atualizar();
+                          var timer = Timer(
+                              const Duration(seconds: 1),
+                              () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Dashboard())));
+                          timer;
                         }
                       },
                     ),
@@ -413,7 +414,6 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
               ),
             ],
           ),
-        )
-      );
+        ));
   }
 }

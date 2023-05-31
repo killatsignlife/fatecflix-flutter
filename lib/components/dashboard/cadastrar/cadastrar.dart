@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fatecflix_mobile/controller/appController.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
@@ -349,8 +351,16 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                           )),
                       child: const Text("Cadastrar usuário"),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()){
-                        _cadastraUsuario();
+                        if (_formKey.currentState!.validate()) {
+                          _cadastraUsuario();
+                          var timer = Timer(
+                              const Duration(seconds: 1),
+                              () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Dashboard())));
+                          timer;
                         }
                       },
                     ),

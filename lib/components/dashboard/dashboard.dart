@@ -137,7 +137,12 @@ class _DashboardState extends State<Dashboard> {
                               DataCell(Text(element.nascimento.toString())),
                               DataCell(
                                 ElevatedButton(
-                                  child: const Icon(Icons.update),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.yellow
+                                  ),
+                                  child: const Icon(
+                                    Icons.update,
+                                    ),
                                   onPressed: () {
                                     usuarioId = element.id;
                                     Navigator.push(
@@ -150,6 +155,9 @@ class _DashboardState extends State<Dashboard> {
                               ),
                               DataCell(
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red
+                                  ),
                                   child: const Icon(Icons.delete),
                                   onPressed: () {
                                     usuarioId = element.id;
@@ -157,7 +165,7 @@ class _DashboardState extends State<Dashboard> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                DeletarUsuario()));
+                                                DeletarUsuario(usuarioId)));
                                   },
                                 ),
                               ),
@@ -170,7 +178,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CadastrarUsuario()));
+                          builder: (context) => const CadastrarUsuario()));
                 },
               ),
             ],
