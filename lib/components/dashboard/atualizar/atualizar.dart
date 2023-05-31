@@ -413,6 +413,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
               ),
             ],
           ),
-        ));
+        )
+      );
   }
 }
