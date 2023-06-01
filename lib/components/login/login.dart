@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../data/database_helper.dart';
 import '../../model/usuario.dart';
 
-//https://www.kindacode.com/article/flutter-set-gradient-background-color-for-entire-screen/
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -36,10 +35,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController senhaController = TextEditingController();
   final dbHelper = DatabaseHelper.instance;
   var init = 0;
-  bool validacao = false;
 
-  //inicializando a database
-  // ignore: unused_element
   _databaseInit() async {
     Map<String, dynamic> row = {
       DatabaseHelper.columnNome: "Aluno teste",
@@ -72,33 +68,38 @@ class _LoginWidgetState extends State<LoginWidget> {
     });
   }
 
-  // ignore: unused_element
-  void _login() {
-    String email = emailController.text;
-    _validaUsuario(email);
-  }
-
-  List<Usuario> usuarioInformado = [];
-
-  _validaUsuario(email) async {
-    var user = await dbHelper.queryRowsLogin(email);
-    String senha = senhaController.text;
-    for (var row in user) {
-      usuarioInformado.add(Usuario.fromMap(row));
-    }
-    if (usuarioInformado[0].senha! == senha) {
-      _showMessafeInScafold('Login realizado com sucesso');
-      validacao = true;
-    } else {
-      _showMessafeInScafold('email ou senha inválidos');
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     if (init == 0) {
       _databaseInit();
       init = 1;
+    }
+
+    
+
+    validaUsuario(email) async {
+      List<Usuario> usuarioInformado = [];
+      var user = await dbHelper.queryRowsLogin(email);
+      String senha = senhaController.text;
+      for (var row in user) {
+        usuarioInformado.add(Usuario.fromMap(row));
+      }
+      if (usuarioInformado[0].senha! == senha) {
+        _showMessafeInScafold('Login realizado com sucesso');
+        var timer = Timer(
+            const Duration(seconds: 1),
+            () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Dashboard())));
+        timer;
+      } else {
+        _showMessafeInScafold('email ou senha inválidos');
+      }
+    }
+
+    void login() {
+      String email = emailController.text;
+      validaUsuario(email);
     }
 
     const sizedBoxSpace = SizedBox(height: 24);
@@ -196,17 +197,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             )),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            _login();
-                          }
-                          if (validacao == true) {
-                            var timer = Timer(
-                                const Duration(seconds: 1),
-                                () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Dashboard())));
-                            timer;
+                            login();
                           }
                         },
                         child: const Text(

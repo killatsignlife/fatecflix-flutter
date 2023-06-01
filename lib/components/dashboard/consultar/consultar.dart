@@ -22,7 +22,6 @@ class _ConsultarUsuarioState extends State<ConsultarUsuario> {
   static const String _title = 'FatecFlix';
   List<Usuario> usuario = [];
 
-
   TextEditingController idController = TextEditingController();
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -33,7 +32,6 @@ class _ConsultarUsuarioState extends State<ConsultarUsuario> {
   TextEditingController anoIngressoController = TextEditingController();
   TextEditingController periodoController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
-
 
   void _consultaId(id) async {
     final user = await dbHelper.queryRows(id);
@@ -78,7 +76,7 @@ class _ConsultarUsuarioState extends State<ConsultarUsuario> {
               sizedBoxSpace,
               const Center(
                   child: Text(
-                'Deletar dados do usuário',
+                'Visualizar dados do usuário',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
@@ -121,7 +119,7 @@ class _ConsultarUsuarioState extends State<ConsultarUsuario> {
                           ),
                           controller: emailController,
                         )),
-                        Container(
+                    Container(
                         padding: const EdgeInsets.all(20),
                         height: 100,
                         child: TextField(
@@ -143,7 +141,7 @@ class _ConsultarUsuarioState extends State<ConsultarUsuario> {
                           ),
                           controller: cpfController,
                         )),
-                     Container(
+                    Container(
                         padding: const EdgeInsets.all(20),
                         height: 100,
                         child: TextField(

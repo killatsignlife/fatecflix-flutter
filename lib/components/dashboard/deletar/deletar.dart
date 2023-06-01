@@ -84,7 +84,7 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
               sizedBoxSpace,
               const Center(
                   child: Text(
-                'Deletar dados do usuário',
+                'Deletar usuário',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,

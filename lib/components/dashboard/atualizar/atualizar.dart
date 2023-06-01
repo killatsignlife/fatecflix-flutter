@@ -109,10 +109,10 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
               sizedBoxSpace,
               const Center(
                   child: Text(
-                'Atualizar dados do usuário',
+                'Atualizar dados',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 26,
                 ),
               )),
               sizedBoxSpace,
@@ -128,7 +128,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.person),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "Nome completo",
                             labelText: "nome",
                             labelStyle: TextStyle(
@@ -153,7 +153,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.email),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "usuario@email.com",
                             labelText: "e-mail",
                             labelStyle: TextStyle(
@@ -178,7 +178,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.numbers_rounded),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "000000000000",
                             labelText: "RA",
                             labelStyle: TextStyle(
@@ -203,7 +203,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.numbers),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "000.000.000-00",
                             labelText: "CPF",
                             labelStyle: TextStyle(
@@ -228,7 +228,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.datetime,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.date_range),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "00/00/0000",
                             labelText: "Data de Nascimento",
                             labelStyle: TextStyle(
@@ -253,7 +253,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.book),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             hintText: "DSM",
                             labelText: "Curso",
                             labelStyle: TextStyle(
@@ -278,7 +278,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.datetime,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.date_range),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             labelText: "Ano de ingresso",
                             labelStyle: TextStyle(
                                 color: Colors.black, fontSize: labelFontSize)),
@@ -302,7 +302,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.abc),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             labelText: "Período",
                             hintText: "Manhã, Tarde, Noite, EAD",
                             labelStyle: TextStyle(
@@ -327,7 +327,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.visiblePassword,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.password),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             labelText: "Senha",
                             hintText: "",
                             labelStyle: TextStyle(
@@ -352,7 +352,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         keyboardType: TextInputType.visiblePassword,
                         decoration: const InputDecoration(
                             icon: Icon(Icons.password),
-                            iconColor: Colors.black,
+                            iconColor: Colors.blueGrey,
                             labelText: "Confirmação de senha",
                             hintText: "",
                             labelStyle: TextStyle(

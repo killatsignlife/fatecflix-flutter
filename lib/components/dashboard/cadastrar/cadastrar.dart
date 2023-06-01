@@ -75,15 +75,12 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
               sizedBoxSpace,
               const Center(
                   child: Text(
-                'Cadastre um aluno ou instrutor',
+                'Cadastre um usuário da plataforma',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
               )),
-              Obx(() => Text(
-                    '${controller.message.value}',
-                  )),
               sizedBoxSpace,
               Form(
                 key: _formKey,
