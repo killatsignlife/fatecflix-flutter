@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
@@ -10,36 +8,32 @@ import 'package:get/get.dart';
 
 import '../../../model/usuario.dart';
 
-class DeletarUsuario extends StatefulWidget {
-  const DeletarUsuario(this.usuarioId, {super.key});
+class ConsultarUsuario extends StatefulWidget {
+  const ConsultarUsuario(this.usuarioId, {super.key});
   final int? usuarioId;
 
   @override
-  State<DeletarUsuario> createState() => _DeletarUsuarioState();
+  State<ConsultarUsuario> createState() => _ConsultarUsuarioState();
 }
 
-class _DeletarUsuarioState extends State<DeletarUsuario> {
+class _ConsultarUsuarioState extends State<ConsultarUsuario> {
   final AppController controller = Get.put(AppController());
   final dbHelper = DatabaseHelper.instance;
   static const String _title = 'FatecFlix';
   List<Usuario> usuario = [];
 
+
+  TextEditingController idController = TextEditingController();
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController raController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
+  TextEditingController nascimentoController = TextEditingController();
   TextEditingController cursoController = TextEditingController();
-  TextEditingController idController = TextEditingController();
+  TextEditingController anoIngressoController = TextEditingController();
+  TextEditingController periodoController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
 
-  void _showMessafeInScafold(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-    ));
-  }
-
-  String nome = "";
-  String email = "";
-  String cpf = "";
-  String curso = "";
 
   void _consultaId(id) async {
     final user = await dbHelper.queryRows(id);
@@ -48,17 +42,17 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
     }
 
     setState(() {
+      idController.text = widget.usuarioId.toString();
       nomeController.text = usuario[0].nome!;
       emailController.text = usuario[0].email!;
+      raController.text = usuario[0].ra!;
       cpfController.text = usuario[0].cpf!;
+      nascimentoController.text = usuario[0].nascimento!;
       cursoController.text = usuario[0].curso!;
-      idController.text = widget.usuarioId.toString();
+      anoIngressoController.text = usuario[0].anoIngresso!;
+      periodoController.text = usuario[0].periodo!;
+      senhaController.text = usuario[0].senha!;
     });
-  }
-
-  void _deletarUsuario(id) async {
-    await dbHelper.delete(id!);
-    _showMessafeInScafold('Usuário deletado com sucesso - Id:  $id');
   }
 
   @override
@@ -127,6 +121,17 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
                           ),
                           controller: emailController,
                         )),
+                        Container(
+                        padding: const EdgeInsets.all(20),
+                        height: 100,
+                        child: TextField(
+                          enabled: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'RA',
+                          ),
+                          controller: raController,
+                        )),
                     Container(
                         padding: const EdgeInsets.all(20),
                         height: 100,
@@ -137,6 +142,17 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
                             labelText: 'CPF',
                           ),
                           controller: cpfController,
+                        )),
+                     Container(
+                        padding: const EdgeInsets.all(20),
+                        height: 100,
+                        child: TextField(
+                          enabled: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Data de Nascimento',
+                          ),
+                          controller: nascimentoController,
                         )),
                     Container(
                         padding: const EdgeInsets.all(20),
@@ -149,27 +165,39 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
                           ),
                           controller: cursoController,
                         )),
-                    sizedBoxSpace,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(320.0, 48.0),
-                          backgroundColor:
-                              const Color.fromARGB(255, 22, 12, 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          )),
-                      child: const Text("Deletar Dados"),
-                      onPressed: () {
-                        _deletarUsuario(widget.usuarioId);
-                        var timer = Timer(
-                            const Duration(seconds: 1),
-                            () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Dashboard())));
-                        timer;
-                      },
-                    ),
+                    Container(
+                        padding: const EdgeInsets.all(20),
+                        height: 100,
+                        child: TextField(
+                          enabled: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Ingresso',
+                          ),
+                          controller: anoIngressoController,
+                        )),
+                    Container(
+                        padding: const EdgeInsets.all(20),
+                        height: 100,
+                        child: TextField(
+                          enabled: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Período',
+                          ),
+                          controller: periodoController,
+                        )),
+                    Container(
+                        padding: const EdgeInsets.all(20),
+                        height: 100,
+                        child: TextField(
+                          enabled: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Senha',
+                          ),
+                          controller: senhaController,
+                        )),
                     sizedBoxSpace,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -187,6 +215,7 @@ class _DeletarUsuarioState extends State<DeletarUsuario> {
                                 builder: (context) => const Dashboard()));
                       },
                     ),
+                    sizedBoxSpace,
                   ],
                 ),
               ),

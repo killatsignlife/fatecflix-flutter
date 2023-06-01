@@ -1,7 +1,10 @@
+// ignore: unused_import
 import 'dart:io';
 
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+// ignore: unused_import
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
@@ -83,6 +86,12 @@ class DatabaseHelper {
     return await db!.query(table, where: "$columnId LIKE '%$id%'");
   }
 
+  //login
+  Future<List<Map<String, dynamic>>> queryRowsLogin(email) async {
+    Database? db = await instance.database;
+    return await db!.query(table, where: "$columnEmail LIKE '%$email%'");
+  }
+
   // Update
   Future<int> update(Map<String, dynamic> row) async {
     Database? db = await instance.database;
@@ -97,4 +106,6 @@ class DatabaseHelper {
 
     return await db!.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
+
+  //Inicializando a database
 }

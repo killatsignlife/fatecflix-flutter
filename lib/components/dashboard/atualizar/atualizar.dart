@@ -4,7 +4,9 @@ import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fatecflix_mobile/controller/appController.dart';
+// ignore: unused_import
+import 'package:fatecflix_mobile/controller/app_controller.dart';
+// ignore: unused_import
 import 'package:get/get.dart';
 
 import '../../../model/usuario.dart';
@@ -18,7 +20,7 @@ class AtualizarUsuario extends StatefulWidget {
 }
 
 class _AtualizarUsuarioState extends State<AtualizarUsuario> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -93,7 +95,7 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
   Widget build(BuildContext context) {
     const inputFontSize = 18.0;
     const labelFontSize = 18.0;
-    const sizedBoxSpace = SizedBox(height: 24);
+    const sizedBoxSpace = SizedBox(height: 26);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Fatecflix'),
@@ -406,9 +408,10 @@ class _AtualizarUsuarioState extends State<AtualizarUsuario> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => const Dashboard()));
                       },
                     ),
+                    sizedBoxSpace,
                   ],
                 ),
               ),

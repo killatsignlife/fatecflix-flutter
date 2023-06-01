@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fatecflix_mobile/components/login/login.dart';
 
+
 void main() {
-  runApp(const MaterialApp(
-    home : LoginWidget()
-  ));
+  
+  runApp(const MaterialApp(home: LoginWidget()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return const GetMaterialApp(
       title: _title,
       debugShowCheckedModeBanner: false,

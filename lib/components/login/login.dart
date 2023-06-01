@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
+
+import '../../data/database_helper.dart';
+import '../../model/usuario.dart';
 
 //https://www.kindacode.com/article/flutter-set-gradient-background-color-for-entire-screen/
 class MyApp extends StatelessWidget {
@@ -24,30 +29,78 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  String _info = "Informe seu e-mail e senha para logar no sistema";
+  String _info =
+      "Informe seu e-mail e senha para logar no sistema \n teste: email: aluno@email.com \n senha: 12345678";
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  final dbHelper = DatabaseHelper.instance;
+  var init = 0;
+  bool validacao = false;
+
+  //inicializando a database
+  // ignore: unused_element
+  _databaseInit() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnNome: "Aluno teste",
+      DatabaseHelper.columnSobrenome: "Aluno teste",
+      DatabaseHelper.columnEmail: "aluno@email.com",
+      DatabaseHelper.columnRa: "9999999999",
+      DatabaseHelper.columnCpf: "99999999999",
+      DatabaseHelper.columnDataNascimento: "09/09/09",
+      DatabaseHelper.columnCurso: "DSM",
+      DatabaseHelper.columnAnoIngresso: "2020",
+      DatabaseHelper.columnPeriodo: "Manhã",
+      DatabaseHelper.columnSenha: "12345678"
+    };
+    await dbHelper.insert(row);
+  }
+
+  void _showMessafeInScafold(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  }
 
   void _resetaCampos() {
     emailController.text = "";
     senhaController.text = "";
     setState(() {
-      _info = "Informe seu e-mail e senha para logar no sistema";
+      _info =
+          "Informe seu e-mail e senha para logar no sistema \n teste: email: aluno@email.com \n senha: 12345678";
       _formKey = GlobalKey<FormState>();
     });
   }
 
+  // ignore: unused_element
   void _login() {
-    setState(() {
-      String email = emailController.text;
-      String senha = senhaController.text;
-      _info = "email: $email, \n senha: $senha";
-    });
+    String email = emailController.text;
+    _validaUsuario(email);
+  }
+
+  List<Usuario> usuarioInformado = [];
+
+  _validaUsuario(email) async {
+    var user = await dbHelper.queryRowsLogin(email);
+    String senha = senhaController.text;
+    for (var row in user) {
+      usuarioInformado.add(Usuario.fromMap(row));
+    }
+    if (usuarioInformado[0].senha! == senha) {
+      _showMessafeInScafold('Login realizado com sucesso');
+      validacao = true;
+    } else {
+      _showMessafeInScafold('email ou senha inválidos');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (init == 0) {
+      _databaseInit();
+      init = 1;
+    }
+
     const sizedBoxSpace = SizedBox(height: 24);
     return Container(
         decoration: const BoxDecoration(
@@ -136,15 +189,25 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(320.0, 48.0),
-                            backgroundColor: const Color.fromARGB(255, 194, 41, 31),
+                            backgroundColor:
+                                const Color.fromARGB(255, 194, 41, 31),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25.0),
                             )),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dashboard()));
+                          if (_formKey.currentState!.validate()) {
+                            _login();
+                          }
+                          if (validacao == true) {
+                            var timer = Timer(
+                                const Duration(seconds: 1),
+                                () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Dashboard())));
+                            timer;
+                          }
                         },
                         child: const Text(
                           "ENTRAR",
@@ -162,12 +225,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                               borderRadius: BorderRadius.circular(25.0),
                             )),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _login();
-                          }
+                          _resetaCampos();
                         },
                         child: const Text(
-                          "Cadastre-se",
+                          "Apagar",
                           style: TextStyle(
                               color: Color.fromARGB(255, 194, 41, 31),
                               fontSize: 22.0),

@@ -1,4 +1,5 @@
-import 'package:fatecflix_mobile/controller/appController.dart';
+import 'package:fatecflix_mobile/components/dashboard/consultar/consultar.dart';
+import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/atualizar/atualizar.dart';
 import 'package:fatecflix_mobile/components/dashboard/cadastrar/cadastrar.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
@@ -9,7 +10,6 @@ import 'package:get/get.dart';
 
 import '../../model/usuario.dart';
 
-
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -17,16 +17,11 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
-/* 
-    TODO: Dashboard/Listagem de usuarios com o botão 
-    para atualizar e deletar um registro; e 
-    um botão 'Add' para adicionar usuario.
-  */
 class _DashboardState extends State<Dashboard> {
   List<Usuario> usuarios = [];
   int? usuarioId;
 
-    @override
+  @override
   void initState() {
     super.initState();
     _consultar();
@@ -112,6 +107,15 @@ class _DashboardState extends State<Dashboard> {
                       DataColumn(
                         label: Expanded(
                           child: Text(
+                            'Consultar',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic, color: Colors.red),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
                             'Atualizar',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic, color: Colors.red),
@@ -138,11 +142,27 @@ class _DashboardState extends State<Dashboard> {
                               DataCell(
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.yellow
+                                      backgroundColor: Colors.green[200]),
+                                  child: const Icon(
+                                    Icons.visibility,
                                   ),
+                                  onPressed: () {
+                                    usuarioId = element.id;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ConsultarUsuario(usuarioId)));
+                                  },
+                                ),
+                              ),
+                              DataCell(
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.blueGrey),
                                   child: const Icon(
                                     Icons.update,
-                                    ),
+                                  ),
                                   onPressed: () {
                                     usuarioId = element.id;
                                     Navigator.push(
@@ -156,8 +176,7 @@ class _DashboardState extends State<Dashboard> {
                               DataCell(
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red
-                                  ),
+                                      backgroundColor: Colors.red),
                                   child: const Icon(Icons.delete),
                                   onPressed: () {
                                     usuarioId = element.id;
@@ -189,6 +208,7 @@ class _DashboardState extends State<Dashboard> {
   // List todasLinhas;
   void _consultar() async {
     final todasLinhas = await dbHelper.queryAllRows();
+    // ignore: avoid_print
     print('Consulta toda as linhas:');
     for (var row in todasLinhas) {
       usuarios.add(Usuario.fromMap(row));

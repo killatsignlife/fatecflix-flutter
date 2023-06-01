@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fatecflix_mobile/controller/appController.dart';
+import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class CadastrarUsuario extends StatefulWidget {
 }
 
 class _CadastrarUsuarioState extends State<CadastrarUsuario> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -51,7 +51,6 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
       String anoIngresso = anoIngressoController.text;
       String periodo = periodoController.text;
       String senha = senhaController.text;
-      String confirmacaoSenha = confirmacaoSenhaController.text;
       _inserir(
           nome, email, ra, cpf, nascimento, curso, anoIngresso, periodo, senha);
     });
@@ -61,7 +60,7 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
   Widget build(BuildContext context) {
     const inputFontSize = 18.0;
     const labelFontSize = 18.0;
-    const sizedBoxSpace = SizedBox(height: 24);
+    const sizedBoxSpace = SizedBox(height: 26);
 
     return Scaffold(
         appBar: AppBar(
@@ -378,9 +377,10 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => const Dashboard()));
                       },
                     ),
+                    sizedBoxSpace
                   ],
                 ),
               ),
