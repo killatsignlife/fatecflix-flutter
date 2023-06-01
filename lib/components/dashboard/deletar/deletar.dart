@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 // ignore: unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../model/usuario.dart';
 
@@ -19,7 +17,6 @@ class DeletarUsuario extends StatefulWidget {
 }
 
 class _DeletarUsuarioState extends State<DeletarUsuario> {
-  final AppController controller = Get.put(AppController());
   final dbHelper = DatabaseHelper.instance;
   static const String _title = 'FatecFlix';
   List<Usuario> usuario = [];

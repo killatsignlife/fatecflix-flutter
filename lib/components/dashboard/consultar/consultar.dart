@@ -1,10 +1,8 @@
-import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 // ignore: unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../model/usuario.dart';
 
@@ -17,7 +15,6 @@ class ConsultarUsuario extends StatefulWidget {
 }
 
 class _ConsultarUsuarioState extends State<ConsultarUsuario> {
-  final AppController controller = Get.put(AppController());
   final dbHelper = DatabaseHelper.instance;
   static const String _title = 'FatecFlix';
   List<Usuario> usuario = [];

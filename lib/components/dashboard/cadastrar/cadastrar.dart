@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CadastrarUsuario extends StatefulWidget {
   const CadastrarUsuario({super.key});
@@ -29,8 +27,6 @@ class _CadastrarUsuarioState extends State<CadastrarUsuario> {
   TextEditingController confirmacaoSenhaController = TextEditingController();
 
   static const String _title = 'FatecFlix';
-  final AppController controller = Get.put(AppController());
-  //final AppController controller = Get.find();
 
   final dbHelper = DatabaseHelper.instance;
 

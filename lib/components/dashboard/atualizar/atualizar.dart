@@ -4,10 +4,6 @@ import 'package:fatecflix_mobile/components/dashboard/dashboard.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:fatecflix_mobile/controller/app_controller.dart';
-// ignore: unused_import
-import 'package:get/get.dart';
 
 import '../../../model/usuario.dart';
 

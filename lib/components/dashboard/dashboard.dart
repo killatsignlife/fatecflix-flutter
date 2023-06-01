@@ -1,12 +1,10 @@
 import 'package:fatecflix_mobile/components/dashboard/consultar/consultar.dart';
-import 'package:fatecflix_mobile/controller/app_controller.dart';
 import 'package:fatecflix_mobile/components/dashboard/atualizar/atualizar.dart';
 import 'package:fatecflix_mobile/components/dashboard/cadastrar/cadastrar.dart';
 import 'package:fatecflix_mobile/data/database_helper.dart';
 import 'package:fatecflix_mobile/components/dashboard/deletar/deletar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../model/usuario.dart';
 
@@ -27,7 +25,6 @@ class _DashboardState extends State<Dashboard> {
     _consultar();
   }
 
-  final AppController controller = Get.put(AppController());
   final dbHelper = DatabaseHelper.instance;
 
   static const String _title = 'FatecFlix';
